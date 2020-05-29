@@ -63,3 +63,12 @@ function f3(tree) {
 f3(a);
 
 console.log(arr);
+
+
+
+
+
+
+
+
+

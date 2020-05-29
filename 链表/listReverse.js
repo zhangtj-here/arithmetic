@@ -23,7 +23,7 @@ function reverseNodelist(root) {
     //
     if (root.next.next === null) {
         root.next.next = root;
-        root.next = null;
+        // root.next = null;
         return root.next;
     } else {
         result = reverseNodelist(root.next);
@@ -44,7 +44,7 @@ function reverseNodelist(root) {
 }
 
 console.log(reverseNodelist(node1));
-console.log(JSON.stringify(node1, null, "    "));
-console.log(JSON.stringify(node5, null, "    "));
+// console.log(JSON.stringify(node1, null, "    "));
+// console.log(JSON.stringify(node5, null, "    "));
 
 
