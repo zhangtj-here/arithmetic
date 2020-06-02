@@ -88,10 +88,66 @@ function change(root) {
 
 }
 
-console.log(JSON.stringify(change(node2), null, "     "));
+// console.log(JSON.stringify(change(node2), null, "     "));
 
 
 // console.log(isBalance(node2));
+let num1 = 0;
+function addNode(root, num) {
+    if (root === null) return;
+    if (root.value === num) return;
+    if (root.value > num) {
+        if (root.left === null) {
+            num1++;
+            root.left = new Node(num);
+        }
+        else addNode(root.left, num);
+    } else {
+        if (root.right === null) {
+            num1++;
+            root.right = new Node(num);
+        }
+        else addNode(root.right, num);
+    }
+}
+
+function buildSearchTree(arr) {
+    if (arr === null || arr.length === 0) return;
+    let root = new Node(arr[0]);
+    for (let i = 1; i < arr.length; i++) {
+        addNode(root, arr[i]);
+    }
+    return root;
+}
+
+let num = 0;
+function searchByTree(root, target) {
+    num++;
+    if (root === null) return false;
+    if (root.value === target) return true;
+    if (root.value > target) return searchByTree(root.left, target);
+    else return searchByTree(root.right, target);
+}
+let arr = [];
+for (let i = 0; i < 10000; i++) {
+    arr.push(Math.floor(Math.random() * 100000));
+}
+
+
+let root = buildSearchTree(arr);
+
+
+console.log(num1);
+console.log(getDeep(root));
+console.log(searchByTree(root, 10000));
+console.log(num);
+
+num = 0;
+let root1 = change(root);
+console.log(getDeep(root1));
+
+console.log(searchByTree(root1, 10000));
+console.log(num);
 
 
 
