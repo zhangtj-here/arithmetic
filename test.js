@@ -4,26 +4,15 @@ function Node(value) {
     this.right = null;
 }
 
-let a = new Node('a');
-let b = new Node('b');
-let c = new Node('c');
-let d = new Node('d');
-let e = new Node('e');
-let f = new Node('f');
-let g = new Node('g');
-let h = new Node('h');
-let j = new Node('j');
-let m = new Node('m');
+let node2 = new Node('2');
+let node5 = new Node('5');
+let node3 = new Node('3');
+let node6 = new Node('6');
 
-a.left = b;
-a.right = c;
-b.left = d;
-b.right = e;
-c.left = f;
-c.right = g;
-d.right = h;
-e.right = j;
-h.left = m;
+node2.right = node5;
+node5.left = node3;
+node5.right = node6;
+
 
 function getDeep(root) {
     if (root == null) return 0;
@@ -46,8 +35,39 @@ function isBalance(root) {
 
 
 
+function roteLeft(root) {
+    let newRoot = root.right;
+    let changeRoot = root.right.left;
+    root.right = changeRoot;
+    newRoot.left = root;
+    return newRoot;
+}
 
-console.log(isBalance(c));
+function roteRight(root) {
+    let newRoot = root.left;
+    let changeRoot = root.left.right;
+    root.left = changeRoot;
+    newRoot.right = root;
+    return newRoot;
+}
+function change(root) {
+    if (isBalance(root)) return root;
+    if (root.left !== null) root.left = change(root.left);
+    if (root.right !== null) root.right = change(root.right);
+    let leftDeep = getDeep(root.left);
+    let rightDeep = getDeep(root.right);
+    if (Math.abs(leftDeep - rightDeep) < 2) return root;
+    else {
+        if (leftDeep > rightDeep) return roteRight(root);
+        else return roteLeft(root);
+    }
+
+}
+
+console.log(change(node2));
+
+
+// console.log(isBalance(node2));
 
 
 
